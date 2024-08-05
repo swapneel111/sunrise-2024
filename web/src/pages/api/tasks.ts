@@ -39,14 +39,14 @@ function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
 }
 
 function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
-  const { title, description, persona, group } = req.body;
+  const { title, description, persona, group, section } = req.body;
 
-  if (!title || !description || !persona || group === undefined) {
+  if (!title || !description || !persona || group === undefined || section === undefined) {
     res.status(400).json({ error: 'Missing required fields' });
     return;
   }
 
-  createTask(title, description, persona, group);
+  createTask(title, description, persona, group, section); // Passing the section parameter
   res.status(201).json({ message: 'Task created successfully' });
 }
 
