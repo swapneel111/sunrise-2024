@@ -34,31 +34,32 @@ describe('Task Manager', () => {
   });
 
   test('should fetch active tasks', () => {
+    // Assuming we complete the initial tasks and only expect tasks from the next groups
+    completeTask('Initial Setup'); // Complete an initial task if needed
+    
     const activeTasks = getActiveTasks();
-    expect(activeTasks).toEqual(
-      [
-        {
-          id: 3,
-          title: "Basic Git",
-          description: "Learn basic Git commands.",
-          group: 2,
-          completed: false,
-          persona: "Intern",
-          section: 1
-        },
-        {
-          id: 4,
-          title: "Git Collaboration",
-          description: "Collaborate on a Git repository.",
-          group: 2,
-          completed: false,
-          persona: "Intern",
-          section: 1
-        },
-        // Add other expected tasks here...
-      ]
-    );
+    expect(activeTasks).toEqual([
+      {
+        id: 3,
+        title: "Basic Git",
+        description: "Learn basic Git commands.",
+        group: 2,
+        completed: false,
+        persona: "Intern",
+        section: 1,
+      },
+      {
+        id: 4,
+        title: "Git Collaboration",
+        description: "Collaborate on a Git repository.",
+        group: 2,
+        completed: false,
+        persona: "Intern",
+        section: 1,
+      },
+    ]);
   });
+  
   
 
   test('should fetch all tasks', () => {
