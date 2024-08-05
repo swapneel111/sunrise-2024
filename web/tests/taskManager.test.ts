@@ -17,13 +17,14 @@ describe('Task Manager', () => {
   });
 
   test('should not have Group 2 tasks before completing Group 1', () => {
+    // Mark all Group 1 tasks as incomplete
     completeTask('Initial Setup');
     const activeTasks = getActiveTasks();
     expect(activeTasks).not.toContainEqual(
       expect.objectContaining({ title: 'Basic Git' })
     );
   });
-
+  
   test('should mark task as completed', () => {
     completeTask('Basic Introduction');
     const completedTasks = getCompletedTasks();
@@ -35,10 +36,30 @@ describe('Task Manager', () => {
   test('should fetch active tasks', () => {
     const activeTasks = getActiveTasks();
     expect(activeTasks).toEqual(
-      [{"completed": false, "description": "Learn basic Git commands.", "group": 2, "id": 3, "persona": "Intern", "title": "Basic Git"}, {"completed": false, "description": "Collaborate on a Git repository.", "group": 2, "id": 4, "persona": "Intern", "title": "Git Collaboration"}])
-      
-    ;
+      [
+        {
+          id: 3,
+          title: "Basic Git",
+          description: "Learn basic Git commands.",
+          group: 2,
+          completed: false,
+          persona: "Intern",
+          section: 1
+        },
+        {
+          id: 4,
+          title: "Git Collaboration",
+          description: "Collaborate on a Git repository.",
+          group: 2,
+          completed: false,
+          persona: "Intern",
+          section: 1
+        },
+        // Add other expected tasks here...
+      ]
+    );
   });
+  
 
   test('should fetch all tasks', () => {
     const allTasks = getAllTasks();
