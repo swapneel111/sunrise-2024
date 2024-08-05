@@ -32,7 +32,7 @@ const Row = styled('div')`
 `;
 
 const Counter = styled('div')`
-  margin-top:10px;
+  margin-top: 10px;
   font-size: 1rem;
   font-weight: bold;
   color: #007bff; /* Primary color */
@@ -71,11 +71,12 @@ function App() {
   const [inProgressTasks, setInProgressTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
   const [open, setOpen] = useState(false);
-  const [newTask, setNewTask] = useState<{ title: string; description: string; persona: string; group: number; section:1 }>({
+  const [newTask, setNewTask] = useState<{ title: string; description: string; persona: string; group: number; section: number }>({
     title: '',
     description: '',
     persona: '',
     group: 0,
+    section: 1, // Add a default value for section
   });
   const [inProgressTracker, setInProgressTracker] = useState<Set<string>>(new Set()); // Explicitly typed as Set<string>
 
@@ -113,7 +114,7 @@ function App() {
   };
 
   const handleCreate = () => {
-    createTask(newTask.title, newTask.description, newTask.persona, newTask.group,newTask.section);
+    createTask(newTask.title, newTask.description, newTask.persona, newTask.group, newTask.section);
     setTasks(getAllTasks());
     setOpen(false);
   };
@@ -220,6 +221,14 @@ function App() {
               type="number" 
               className="mb-4"
               onChange={e => setNewTask({ ...newTask, group: parseInt(e.target.value, 10) })} 
+            />
+            <TextField 
+              label="Section" 
+              fullWidth 
+              type="number" 
+              className="mb-4"
+              value={newTask.section}
+              onChange={e => setNewTask({ ...newTask, section: parseInt(e.target.value, 10) })} 
             />
           </DialogContent>
           <DialogActions>
