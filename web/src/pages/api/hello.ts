@@ -19,11 +19,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
 
     case "POST":
-      const { title, description, persona, group } = req.body;
-      if (!title || !description || !persona || group === undefined) {
+      const { title, description, persona, group, section } = req.body;
+      if (!title || !description || !persona || group === undefined || section === undefined) {
         res.status(400).json({ error: "Missing required fields" });
       } else {
-        createTask(title, description, persona, group);
+        createTask(title, description, persona, group, section); // Added section parameter
         res.status(201).json({ message: "Task created successfully" });
       }
       break;
