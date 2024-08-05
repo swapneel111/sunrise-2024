@@ -71,7 +71,7 @@ function App() {
   const [inProgressTasks, setInProgressTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
   const [open, setOpen] = useState(false);
-  const [newTask, setNewTask] = useState<{ title: string; description: string; persona: string; group: number }>({
+  const [newTask, setNewTask] = useState<{ title: string; description: string; persona: string; group: number; section:1 }>({
     title: '',
     description: '',
     persona: '',
@@ -113,7 +113,7 @@ function App() {
   };
 
   const handleCreate = () => {
-    createTask(newTask.title, newTask.description, newTask.persona, newTask.group);
+    createTask(newTask.title, newTask.description, newTask.persona, newTask.group,newTask.section);
     setTasks(getAllTasks());
     setOpen(false);
   };
