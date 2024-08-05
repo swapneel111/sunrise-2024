@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { initializeTasks, getAllTasks, completeTask, createTask, deleteTask } from '../modules/taskManager';
 import { styled } from '@mui/system';
+import Task from '../model/Task'; // Ensure this import is correct
 
 const Card = styled('div')`
   display: flex;
@@ -66,12 +67,17 @@ const Navbar = styled('div')`
 `;
 
 function App() {
-  const [tasks, setTasks] = useState(getAllTasks());
-  const [inProgressTasks, setInProgressTasks] = useState([]); // State for in-progress tasks
-  const [completedTasks, setCompletedTasks] = useState([]); // Separate state for completed tasks
+  const [tasks, setTasks] = useState<Task[]>(getAllTasks());
+  const [inProgressTasks, setInProgressTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]); // Explicitly typed as Task[]
   const [open, setOpen] = useState(false);
-  const [newTask, setNewTask] = useState({ title: '', description: '', persona: '', group: 0 });
-  const [inProgressTracker, setInProgressTracker] = useState(new Set()); // Track tasks that are being marked as in-progress
+  const [newTask, setNewTask] = useState<{ title: string; description: string; persona: string; group: number }>({
+    title: '',
+    description: '',
+    persona: '',
+    group: 0,
+  });
+  const [inProgressTracker, setInProgressTracker] = useState<Set<string>>(new Set()); // Explicitly typed as Set<string>
 
   useEffect(() => {
     initializeTasks();
@@ -101,7 +107,7 @@ function App() {
     setInProgressTasks(prev => prev.filter(task => task.title !== title));
   };
 
-  const handleMoveToInProgress = (task: any) => {
+  const handleMoveToInProgress = (task: Task) => { // Typing as Task
     setInProgressTasks([...inProgressTasks, task]);
     setTasks(tasks.filter(t => t.title !== task.title));
   };
